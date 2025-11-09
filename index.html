@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRUGER — L'Attitude du Luxe Urbain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-overlay {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #D4AF37;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .size-selector input[type="radio"]:checked + label {
+            background-color: #D4AF37;
+            color: black;
+        }
+        
+        .category-hero {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f3f3f3;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #2d2d2d !important;
+            color: #f3f3f3 !important;
+        }
+        
+        .dark-mode .text-gray-800 {
+            color: #f3f3f3 !important;
+        }
+        
+        .dark-mode .bg-gray-100 {
+            background-color: #333333 !important;
+        }
+        
+        .dark-mode .border-gray-200 {
+            border-color: #444444 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-black text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <button id="darkModeToggle" class="text-gray-300 hover:text-white">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:text-gray-300">Accueil</a>
+                    <div class="dropdown relative">
+                        <button class="hover:text-gray-300 flex items-center">
+                            Homme <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white text-black w-48 py-2 mt-2 shadow-lg rounded z-50">
+                            <a href="tshirts.html" class="block px-4 py-2 hover:bg-gray-100">T-shirts</a>
+                            <a href="pantalons.html" class="block px-4 py-2 hover:bg-gray-100">Pantalons</a>
+                            <a href="vestes.html" class="block px-4 py-2 hover:bg-gray-100">Vestes</a>
+                            <a href="ensembles.html" class="block px-4 py-2 hover:bg-gray-100">Ensembles</a>
+                        </div>
+                    </div>
+                    <a href="nouveautes.html" class="hover:text-gray-300">Nouveautés</a>
+                    <a href="accessoires.html" class="hover:text-gray-300">Accessoires</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="text-2xl font-bold tracking-wider">
+                <span class="text-white">KRUGER</span>
+                <span class="text-gold-500">.</span>
+            </a>
+            
+            <div class="flex items-center space-x-6">
+                <div class="relative">
+                    <button id="searchToggle" class="text-gray-300 hover:text-white">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div id="searchBar" class="hidden absolute right-0 mt-2 w-64 bg-white rounded shadow-lg p-2">
+                        <input type="text" placeholder="Rechercher..." class="w-full px-2 py-1 text-black border rounded">
+                    </div>
+                </div>
+                <a href="compte.html" class="text-gray-300 hover:text-white">
+                    <i class="far fa-user"></i>
+                </a>
+                <div class="relative">
+                    <a href="panier.html" class="text-gray-300 hover:text-white">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+                <button id="mobileMenuToggle" class="md:hidden text-gray-300 hover:text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-black text-white py-4 px-4">
+            <a href="index.html" class="block py-2 hover:text-gray-300">Accueil</a>
+            <div class="py-2">
+                <button class="flex items-center hover:text-gray-300">
+                    Homme <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </button>
+                <div class="ml-4 mt-2">
+                    <a href="tshirts.html" class="block py-2 hover:text-gray-300">T-shirts</a>
+                    <a href="pantalons.html" class="block py-2 hover:text-gray-300">Pantalons</a>
+                    <a href="vestes.html" class="block py-2 hover:text-gray-300">Vestes</a>
+                    <a href="ensembles.html" class="block py-2 hover:text-gray-300">Ensembles</a>
+                </div>
+            </div>
+            <a href="nouveautes.html" class="block py-2 hover:text-gray-300">Nouveautés</a>
+            <a href="accessoires.html" class="block py-2 hover:text-gray-300">Accessoires</a>
+            <a href="apropos.html" class="block py-2 hover:text-gray-300">À propos</a>
+            <a href="contact.html" class="block py-2 hover:text-gray-300">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content - will be replaced by other pages -->
+    <main id="main-content">
+        <!-- Page d'accueil -->
+        <div id="home-page">
+            <!-- Hero Section -->
+            <section class="hero-section flex items-center justify-center text-center text-white fade-in">
+                <div class="px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider">KRUGER</h1>
+                    <p class="text-xl md:text-2xl mb-8 font-light">L'Attitude du Luxe Urbain</p>
+                    <a href="#shop" class="bg-white text-black px-8 py-3 font-medium hover:bg-gray-200 transition duration-300 inline-block">
+                        Découvrir la collection
+                    </a>
+                </div>
+            </section>
+
+            <!-- About Brand -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">L'Élégance Urbaine Réinventée</h2>
+                        <p class="max-w-2xl mx-auto text-gray-600">
+                            KRUGER fusionne le streetwear avec le luxe pour créer des pièces uniques qui expriment puissance et sophistication.
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4 text-gray-800">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Qualité Exceptionnelle</h3>
+                            <p class="text-gray-600">
+                                Matières premium sélectionnées pour leur durabilité et leur toucher luxueux.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="text-4xl mb-4 text-gray-800">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Design Audacieux</h3>
+                            <p class="text-gray-600">
+                                Silhouettes modernes qui redéfinissent les codes du streetwear haut de gamme.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="text-4xl mb-4 text-gray-800">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Production Éthique</h3>
+                            <p class="text-gray-600">
+                                Fabrication responsable en Europe avec un impact environnemental minimal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="py-12 bg-gray-100">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold mb-8 text-center">Nos Collections</h2>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="ensembles.html" class="group relative overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
+                                 alt="Ensembles KRUGER" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-xl font-bold">Ensembles</h3>
+                            </div>
+                        </a>
+                        
+                        <a href="tshirts.html" class="group relative overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1634&q=80" 
+                                 alt="T-shirts KRUGER" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-xl font-bold">T-shirts</h3>
+                            </div>
+                        </a>
+                        
+                        <a href="vestes.html" class="group relative overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1595341595379-cf0ff0a60a0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
+                                 alt="Vestes KRUGER" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-xl font-bold">Vestes</h3>
+                            </div>
+                        </a>
+                        
+                        <a href="accessoires.html" class="group relative overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
+                                 alt="Accessoires KRUGER" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-xl font-bold">Accessoires</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section id="shop" class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-3xl font-bold">Nouveautés</h2>
+                        <a href="nouveautes.html" class="text-black hover:underline">Voir tout</a>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Product 1 -->
+                        <div class="product-card relative group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1660&q=80" 
+                                     alt="Ensemble KRUGER Noir" class="w-full h-80 object-cover">
+                                <div class="product-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center p-4">
+                                    <button class="bg-white text-black px-6 py-2 mb-2 hover:bg-gray-200">Voir détails</button>
+                                    <button class="bg-white text-black px-6 py-2 hover:bg-gray-200">Ajouter au panier</button>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-medium">Ensemble Noir Premium</h3>
+                                <p class="text-gray-600">€249.00</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card relative group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1634&q=80" 
+                                     alt="T-shirt KRUGER Blanc" class="w-full h-80 object-cover">
+                                <div class="product-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center p-4">
+                                    <button class="bg-white text-black px-6
+</body>
+</html>
